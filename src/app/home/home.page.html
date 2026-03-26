@@ -1,6 +1,99 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="header-section">
+    <h1>Meu Acervo</h1>
+    <p>{{ livros.length }} livros catalogados</p>
+  </div>
 
-    <ion-button color="secondary">Teste</ion-button>
-    
-    
+  <div class="book-grid">
+    <ion-card *ngFor="let livro of livros" class="book-card">
+      <ion-card-header>
+        <ion-card-subtitle>ISBN: {{ livro.isbn }}</ion-card-subtitle>
+        <ion-card-title>{{ livro.titulo }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="category-container">
+          <ion-chip *ngFor="let cat of livro.categoria" color="primary" outline="true">
+            <ion-label>{{ cat.nome }}</ion-label>
+          </ion-chip>
+        </div>
+
+        <div class="action-buttons">
+          <ion-button fill="clear" color="primary">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="danger">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="inventory-section">
+  <div class="header-section">
+    <h1>Gerenciamento de Estoque</h1>
+    <p>Lista de produtos e valores unitários</p>
+  </div>
+
+  <div class="table-responsive">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome do Produto</th>
+          <th>Preço</th>
+          <th class="ion-text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let produto of produtos">
+          <tr>
+            <td class="code-column">#{{ produto.codigo }}</td>
+            <td class="name-column">{{ produto.nome }}</td>
+            <td class="price-column">R$ {{ produto.preco }}</td>
+            <td class="actions-column">
+              <div class="action-flex">
+                <ion-button fill="clear" color="primary" class="btn-table">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" color="danger" class="btn-table">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <!-- <table border="1">
+    <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Ações</th>
+    </tr>
+    <ion-container *ngFor="let produto of this.produtos">
+        <tr>
+            <td> {{produto.codigo}} </td>
+            <td> {{produto.nome}} </td>
+            <td> {{produto.preco}} </td>
+            <td>
+                <ion-button>
+                    <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+
+                <ion-button>
+                    <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+            </td>
+        </tr>
+    </table>
+  </ion-container>
+  </table> -->
+
+  
 </ion-content>
