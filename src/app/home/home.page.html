@@ -1,99 +1,131 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="header-section">
-    <h1>Meu Acervo</h1>
-    <p>{{ livros.length }} livros catalogados</p>
   </div>
 
-  <div class="book-grid">
-    <ion-card *ngFor="let livro of livros" class="book-card">
-      <ion-card-header>
-        <ion-card-subtitle>ISBN: {{ livro.isbn }}</ion-card-subtitle>
-        <ion-card-title>{{ livro.titulo }}</ion-card-title>
-      </ion-card-header>
+  <div class="acervo-wrapper">
 
-      <ion-card-content>
-        <div class="category-container">
-          <ion-chip *ngFor="let cat of livro.categoria" color="primary" outline="true">
-            <ion-label>{{ cat.nome }}</ion-label>
-          </ion-chip>
-        </div>
+    <!-- Header Acervo -->
+    <div class="acervo-header">
+      <div class="header-icon">
+        <ion-icon name="library-outline"></ion-icon>
+      </div>
+      <div class="header-text">
+        <h1>Acervo</h1>
+        <span class="subtitle">Gestão de livros cadastrados</span>
+      </div>
+    </div>
 
-        <div class="action-buttons">
-          <ion-button fill="clear" color="primary">
-            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-          </ion-button>
-          <ion-button fill="clear" color="danger">
-            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <div class="inventory-section">
-  <div class="header-section">
-    <h1>Gerenciamento de Estoque</h1>
-    <p>Lista de produtos e valores unitários</p>
-  </div>
-
-  <div class="table-responsive">
-    <table class="custom-table">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nome do Produto</th>
-          <th>Preço</th>
-          <th class="ion-text-center">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let produto of produtos">
+    <!-- Tabela Acervo -->
+    <div class="table-container">
+      <table class="livros-table">
+        <thead>
           <tr>
-            <td class="code-column">#{{ produto.codigo }}</td>
-            <td class="name-column">{{ produto.nome }}</td>
-            <td class="price-column">R$ {{ produto.preco }}</td>
-            <td class="actions-column">
-              <div class="action-flex">
-                <ion-button fill="clear" color="primary" class="btn-table">
-                  <ion-icon name="create-outline"></ion-icon>
-                </ion-button>
-                <ion-button fill="clear" color="danger" class="btn-table">
-                  <ion-icon name="trash-outline"></ion-icon>
-                </ion-button>
-              </div>
-            </td>
+            <th class="col-isbn">ISBN</th>
+            <th class="col-titulo">Título</th>
+            <th class="col-categoria">Categorias</th>
+            <th class="col-acoes">Ações</th>
           </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-  <!-- <table border="1">
-    <tr>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Ações</th>
-    </tr>
-    <ion-container *ngFor="let produto of this.produtos">
-        <tr>
-            <td> {{produto.codigo}} </td>
-            <td> {{produto.nome}} </td>
-            <td> {{produto.preco}} </td>
-            <td>
-                <ion-button>
-                    <ion-icon name="trash-outline"></ion-icon>
-                </ion-button>
-
-                <ion-button>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let livro of livros; let i = index">
+            <tr class="livro-row" [style.animation-delay]="i * 60 + 'ms'">
+              <td class="col-isbn">
+                <span class="isbn-badge">{{ livro.isbn }}</span>
+              </td>
+              <td class="col-titulo">
+                <span class="titulo-text">{{ livro.titulo }}</span>
+              </td>
+              <td class="col-categoria">
+                <div class="categorias-wrapper">
+                  <span class="categoria-chip" *ngFor="let cat of livro.categoria">
+                    {{ cat.nome }}
+                  </span>
+                </div>
+              </td>
+              <td class="col-acoes">
+                <div class="acoes-wrapper">
+                  <button class="btn-acao btn-editar" title="Editar">
                     <ion-icon name="create-outline"></ion-icon>
-                </ion-button>
-            </td>
-        </tr>
-    </table>
-  </ion-container>
-  </table> -->
+                  </button>
+                  <button class="btn-acao btn-excluir" title="Excluir">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
 
-  
+      <div class="table-footer">
+        <span class="total-label">
+          {{ livros?.length || 0 }} livro(s) cadastrado(s)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separação -->
+
+  <div class="estoque-wrapper">
+
+    <!-- Header Estoque -->
+    <div class="acervo-header">
+      <div class="header-icon header-icon--estoque">
+        <ion-icon name="cube-outline"></ion-icon>
+      </div>
+      <div class="header-text">
+        <h1>Estoque</h1>
+        <span class="subtitle">Produtos e valores unitários</span>
+      </div>
+    </div>
+
+    <!-- Tabela Estoque -->
+    <div class="table-container">
+      <table class="livros-table">
+        <thead>
+          <tr>
+            <th class="col-codigo">Código</th>
+            <th class="col-nome">Nome do Produto</th>
+            <th class="col-preco">Preço</th>
+            <th class="col-acoes">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let produto of produtos; let i = index">
+            <tr class="livro-row" [style.animation-delay]="i * 60 + 'ms'">
+              <td class="col-codigo">
+                <span class="isbn-badge">#{{ produto.codigo }}</span>
+              </td>
+              <td class="col-nome">
+                <span class="titulo-text">{{ produto.nome }}</span>
+              </td>
+              <td class="col-preco">
+                <span class="preco-badge">
+                  <span class="preco-currency">R$</span>
+                  {{ produto.preco | number:'1.2-2' }}
+                </span>
+              </td>
+              <td class="col-acoes">
+                <div class="acoes-wrapper">
+                  <button class="btn-acao btn-editar" title="Editar">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </button>
+                  <button class="btn-acao btn-excluir" title="Excluir">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        <span class="total-label">
+          {{ produtos?.length || 0 }} produto(s) cadastrado(s)
+        </span>
+      </div>
+    </div>
+  </div>
 </ion-content>

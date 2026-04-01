@@ -1,151 +1,341 @@
-// Variáveis de cor customizadas (opcional)
-:host {
-  --card-background: #ffffff;
-  --bg-subtle: #f4f5f8;
-}
+// ════════════════════════════════════════════
+// Tokens
+// ════════════════════════════════════════════
+$cream:       #FAF7F2;
+$ink:         #1C1A17;
+$brown-mid:   #7C6650;
+$brown-light: #B89E86;
+$accent:      #C4623A;
+$accent-soft: #F2E8E1;
+$success:     #3D7A5E;
+$border:      #E8E0D5;
+$shadow:      rgba(28, 26, 23, 0.08);
+$radius:      12px;
+$radius-sm:   6px;
 
+
+// ════════════════════════════════════════════
+// Page
+// ════════════════════════════════════════════
 ion-content {
-  --background: var(--bg-subtle);
+  --background: #{$cream};
+  --color:      #{$ink};
+  font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-.header-section {
-  padding: 16px 8px;
+
+// ════════════════════════════════════════════
+// Acervo wrapper
+// ════════════════════════════════════════════
+.acervo-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+}
+
+
+// ════════════════════════════════════════════
+// Estoque wrapper
+// ════════════════════════════════════════════
+.estoque-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, $border, transparent);
+    margin-bottom: 40px;
+  }
+
+  .header-icon--estoque {
+    background: $brown-mid;
+    box-shadow: 0 4px 14px rgba($brown-mid, 0.35);
+  }
+
+  .col-codigo { width: 130px; }
+  .col-nome   { min-width: 200px; }
+  .col-preco  { width: 140px; }
+}
+
+
+// ════════════════════════════════════════════
+// Header (compartilhado)
+// ════════════════════════════════════════════
+.acervo-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1.5px solid $border;
+
+  .header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: $accent;
+    border-radius: $radius;
+    color: #fff;
+    font-size: 26px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba($accent, 0.35);
+  }
+
   h1 {
+    font-size: 28px;
     font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 4px;
-  }
-  p {
-    color: #7f8c8d;
-    margin: 0;
-  }
-}
-
-.book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-}
-
-.book-card {
-  margin: 0;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  background: var(--card-background);
-  transition: transform 0.2s ease;
-
-  &:active {
-    transform: scale(0.98);
+    letter-spacing: -0.5px;
+    color: $ink;
+    margin: 0 0 2px;
+    line-height: 1;
   }
 
-  ion-card-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #222;
+  .subtitle {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    color: $brown-mid;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 }
 
-.category-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 16px;
 
-  ion-chip {
-    margin: 0;
-    height: 24px;
-    font-size: 0.75rem;
-  }
+// ════════════════════════════════════════════
+// Table container (compartilhado)
+// ════════════════════════════════════════════
+.table-container {
+  background: #fff;
+  border-radius: $radius;
+  box-shadow:
+    0 1px 3px $shadow,
+    0 8px 32px rgba(28, 26, 23, 0.06);
+  overflow: hidden;
+  border: 1px solid $border;
 }
 
-.action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 8px;
 
-  ion-button {
-    --padding-start: 8px;
-    --padding-end: 8px;
-  }
-}
-
-.inventory-section {
-  margin-top: 32px;
-  padding: 0 8px;
-}
-
-.table-responsive {
-  width: 100%;
-  overflow-x: auto; // Garante que a tabela não quebre o layout no mobile
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.custom-table {
+// ════════════════════════════════════════════
+// Table (compartilhada)
+// ════════════════════════════════════════════
+.livros-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 500px; // Evita que os dados fiquem espremidos
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 
-  thead {
-    background-color: #f8f9fa;
-    
-    th {
-      padding: 16px;
-      text-align: left;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #6c757d;
-      font-weight: 700;
-      border-bottom: 2px solid #edf2f7;
+  // — Head
+  thead tr {
+    background: $ink;
+  }
+
+  thead th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $brown-light;
+    white-space: nowrap;
+
+    &:last-child { text-align: center; }
+  }
+
+  // — Rows
+  tbody .livro-row {
+    border-bottom: 1px solid $border;
+    animation: fadeSlideIn 0.35s ease both;
+
+    &:last-child { border-bottom: none; }
+
+    &:hover {
+      background: $accent-soft;
+      transition: background 0.18s ease;
+
+      .isbn-badge {
+        background: $accent;
+        color: #fff;
+        border-color: $accent;
+      }
     }
   }
 
-  tbody {
-    tr {
-      transition: background-color 0.2s ease;
-      
-      &:hover {
-        background-color: #f1f4f9; // Efeito de destaque ao passar o mouse
-      }
+  td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: $ink;
 
-      td {
-        padding: 14px 16px;
-        border-bottom: 1px solid #edf2f7;
-        color: #2d3436;
-        vertical-align: middle;
-      }
-    }
+    &:last-child { text-align: center; }
   }
+
+  // Colunas do acervo
+  .col-isbn      { width: 150px; }
+  .col-titulo    { min-width: 180px; }
+  .col-categoria { min-width: 200px; }
+  .col-acoes     { width: 110px; }
 }
 
-// Estilização específica das colunas
-.code-column {
+
+// ════════════════════════════════════════════
+// ISBN / Código badge (compartilhado)
+// ════════════════════════════════════════════
+.isbn-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: $radius-sm;
+  border: 1.5px solid $border;
+  font-size: 12px;
   font-family: 'Courier New', monospace;
-  font-weight: bold;
-  color: #555;
+  color: $brown-mid;
+  letter-spacing: 0.5px;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
 }
 
-.name-column {
-  font-weight: 500;
-}
 
-.price-column {
-  color: #27ae60;
+// ════════════════════════════════════════════
+// Título / Nome (compartilhado)
+// ════════════════════════════════════════════
+.titulo-text {
   font-weight: 600;
+  color: $ink;
+  font-size: 14.5px;
 }
 
-.action-flex {
+
+// ════════════════════════════════════════════
+// Categoria chips (acervo)
+// ════════════════════════════════════════════
+.categorias-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.categoria-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: $accent-soft;
+  color: $accent;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid rgba($accent, 0.25);
+  white-space: nowrap;
+}
+
+
+// ════════════════════════════════════════════
+// Preço badge (estoque)
+// ════════════════════════════════════════════
+.preco-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: $success;
+
+  .preco-currency {
+    font-size: 11px;
+    font-weight: 500;
+    color: $brown-mid;
+    letter-spacing: 0.3px;
+  }
+}
+
+.estoque-wrapper .livro-row:hover .preco-badge {
+  color: darken($success, 8%);
+}
+
+
+// ════════════════════════════════════════════
+// Botões de ação (compartilhado)
+// ════════════════════════════════════════════
+.acoes-wrapper {
   display: flex;
   justify-content: center;
   gap: 8px;
 }
 
-.btn-table {
-  margin: 0;
-  height: 32px;
-  --padding-start: 4px;
-  --padding-end: 4px;
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+  &:active { transform: scale(0.93); }
+
+  &.btn-editar {
+    background: rgba($success, 0.1);
+    color: $success;
+
+    &:hover {
+      background: $success;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba($success, 0.35);
+    }
+  }
+
+  &.btn-excluir {
+    background: rgba($accent, 0.1);
+    color: $accent;
+
+    &:hover {
+      background: $accent;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba($accent, 0.35);
+    }
+  }
+}
+
+
+// ════════════════════════════════════════════
+// Table footer (compartilhado)
+// ════════════════════════════════════════════
+.table-footer {
+  padding: 14px 20px;
+  border-top: 1px solid $border;
+  background: $cream;
+
+  .total-label {
+    font-size: 12px;
+    color: $brown-mid;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.3px;
+  }
+}
+
+
+// ════════════════════════════════════════════
+// Responsividade
+// ════════════════════════════════════════════
+@media (max-width: 600px) {
+  .acervo-wrapper,
+  .estoque-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .acervo-header h1 { font-size: 22px; }
+
+  .livros-table {
+    font-size: 13px;
+
+    thead th,
+    td { padding: 12px 12px; }
+
+    .col-isbn,
+    .col-codigo { width: 100px; }
+  }
 }
