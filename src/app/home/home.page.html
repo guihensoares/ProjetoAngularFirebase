@@ -1,6 +1,49 @@
 <ion-content [fullscreen]="true">
 
-    <ion-button color="secondary">Teste</ion-button>
-    
-    
+    <ion-grid>
+        <ion-row>
+
+            <ion-col size="6" id="img">
+            
+            </ion-col>
+            <ion-col size="6">
+
+                <ion-row class="ion-justify-content-center">
+                    <ion-col size="8" >
+                        <h1>Criar Conta</h1>
+                        <ion-input label="Nome" type="text" labelPlacement="floating"></ion-input>
+                        <ion-input label="E-mail" type="email" labelPlacement="floating"></ion-input>
+                        <ion-input label="Senha" type="password" labelPlacement="floating"></ion-input>
+                        <ion-input label="Confirmar senha" type="password" labelPlacement="floating"></ion-input>
+                        <ion-button expand="block" color="primary">
+                            Criar Conta
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </ion-button>
+
+                        <p>Login com</p>
+
+                        <ion-button expand="block" color="sucess">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                            Facebook
+                        </ion-button>
+
+                        <ion-button expand="block" color="secondary">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                            Twitter
+                        </ion-button>
+
+                        <ion-button expand="block" color="tertiary">
+                            <ion-icon name="logo-google"></ion-icon>
+                            Google
+                        </ion-button>
+                        
+                    </ion-col>
+                </ion-row>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+
 </ion-content>
