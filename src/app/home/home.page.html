@@ -3,13 +3,13 @@
     <ion-grid>
         <ion-row>
 
-            <ion-col size="6" id="img">
+            <ion-col size-md="6" id="img" class="ion-hide-md-down">
 
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="12" size-md="6">
 
                 <ion-row class="ion-justify-content-center">
-                    <ion-col size="8">
+                    <ion-col size="12" size-md="8">
                         <h1>Criar Conta</h1>
 
                         <ion-item>
@@ -23,7 +23,7 @@
                         <ion-item>
                             <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
                             <ion-input label="Senha" [type]="senha ? 'text' : 'password'" labelPlacement="stacked" placeholder="Mínimo 8 caracteres"></ion-input>
-                            <ion-icon slot="end" [name]="senha ? 'eye-off-outline' : 'eye-outline'"(click)="revelarSenha()"></ion-icon>
+                            <ion-icon class="cursor" slot="end" [name]="senha ? 'eye-off-outline' : 'eye-outline'"(click)="revelarSenha()"></ion-icon>
                         </ion-item>
                         <ion-item>
                             <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
